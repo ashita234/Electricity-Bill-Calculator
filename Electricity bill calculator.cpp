@@ -3,8 +3,7 @@
     Student Name  : Ashita
     Student ID    : 25BCA20027
     Language      : C++
-
-
+*/
 
 #include <iostream>
 #include <iomanip>
@@ -13,6 +12,7 @@
 using namespace std;
 
 // Function to calculate energy charge based on slab rates
+// 0-100: 1.50 | 101-200: 2.50 | 201-400: 4.00 | 400+: 6.00
 double calculateEnergyCharge(int units) {
     double charge = 0.0;
 
@@ -43,10 +43,16 @@ int main() {
     getline(cin, name);
 
     cout << "Enter previous meter reading: ";
-    cin >> previousReading;
-    
+    if (!(cin >> previousReading) || previousReading < 0) {
+        cout << "Error: Invalid previous reading." << endl;
+        return 1;
+    }
+
     cout << "Enter current meter reading: ";
-    cin >> currentReading;
+    if (!(cin >> currentReading) || currentReading < 0) {
+        cout << "Error: Invalid current reading." << endl;
+        return 1;
+    }
 
     // Validate readings
     if (currentReading < previousReading) {
